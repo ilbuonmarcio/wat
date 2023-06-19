@@ -1,0 +1,2 @@
+liquidctl==1.12.1
+PyMySQL==1.0.3
