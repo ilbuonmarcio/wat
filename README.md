@@ -15,7 +15,7 @@ This code helps you monitor your power consumptions, easy as pie!
 I do it via a cron command like the following:
 
 ```cron
-* * * * * /bin/zsh python /srv/services/wat/main.py
+* * * * * python /srv/services/wat/main.py
 ```
 
 ### License
