@@ -32,7 +32,7 @@ with connection:
         cursor.execute(sql, (datetime_begin))
 
         result = cursor.fetchall()
-        result = [[str(row['hour']) for row in result], [float(row['max_input']) for row in result], [row['max_output'] for row in result], [row['min_input'] for row in result], [row['min_output'] for row in result]]
+        result = [[str(row['hour']) for row in result], [row['max_input'] for row in result], [row['max_output'] for row in result], [row['min_input'] for row in result], [row['min_output'] for row in result]]
 
         plt.plot(result[0], result[1])
         plt.plot(result[0], result[2])
