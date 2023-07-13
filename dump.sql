@@ -30,9 +30,10 @@ CREATE TABLE `logs` (
   `fan_speed` double DEFAULT NULL,
   `case_temperature` double DEFAULT NULL,
   `vrm_temperature` double DEFAULT NULL,
+  `cpu_temp` double NOT NULL DEFAULT 0,
   `datetimestamp` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11205 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -44,4 +45,4 @@ CREATE TABLE `logs` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-19 21:18:53
+-- Dump completed on 2023-07-13  2:05:52

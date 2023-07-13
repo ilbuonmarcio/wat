@@ -1,6 +1,9 @@
 from liquidctl import find_liquidctl_devices
 from pprint import pprint
 import pymysql.cursors
+from shellcommands import execute_command
+import os
+import json
 
 # Connect to the database
 connection = pymysql.connect(host='localhost',
@@ -16,7 +19,6 @@ for dev in devices:
         continue
     
     with dev.connect():
-        print(f'{dev.description} at {dev.bus}:{dev.address}:')
         init_status = dev.initialize()
 
         status = dev.get_status()
@@ -26,7 +28,8 @@ for dev in devices:
             "efficiency": None,
             "fan_speed": None,
             "case_temperature": None,
-            "vrm_temperature": None
+            "vrm_temperature": None,
+            "cpu_temp": None
         }
         
         for key, value, unit in status:
@@ -43,19 +46,22 @@ for dev in devices:
             elif key == "Estimated efficiency":
                 values["efficiency"] = value
 
-        pprint(values)
+        # Gathering CPU temp
+        values["cpu_temp"] = float(execute_command('cpu_temp'))
 
+        # Saving record to database
         with connection:
             with connection.cursor() as cursor:
                 # Create a new record
-                sql = "INSERT INTO `logs` (`input`, `output`, `efficiency`, `fan_speed`, `case_temperature`, `vrm_temperature`) VALUES (%s, %s, %s, %s, %s, %s)"
+                sql = "INSERT INTO `logs` (`input`, `output`, `efficiency`, `fan_speed`, `case_temperature`, `vrm_temperature`, `cpu_temp`) VALUES (%s, %s, %s, %s, %s, %s, %s)"
                 cursor.execute(sql, (
                     values['input'],
                     values['output'],
                     values['efficiency'],
                     values['fan_speed'],
                     values['case_temperature'],
-                    values['vrm_temperature']
+                    values['vrm_temperature'],
+                    values['cpu_temp']
                 ))
 
             connection.commit()
