@@ -32,16 +32,11 @@ with connection:
         cursor.execute(sql, (datetime_begin))
 
         result = cursor.fetchall()
-        result = [[str(row['hour']) for row in result], [row['max_input'] for row in result], [row['max_output'] for row in result], [row['min_input'] for row in result], [row['min_output'] for row in result]]
-
-        # f, ax = plt.subplots()
-        # ax.plot([*set(result[0])])
-        # ymin, ymax = ax.get_xlim()
-        # ax.set_yticks(np.round(np.linspace(ymin, ymax, len(result[1]) // 2), 2))
+        result = [[str(row['hour']) for row in result], [float(row['max_input']) for row in result], [row['max_output'] for row in result], [row['min_input'] for row in result], [row['min_output'] for row in result]]
 
         plt.plot(result[0], result[1])
         plt.plot(result[0], result[2])
         plt.plot(result[0], result[3])
         plt.plot(result[0], result[4])
         plt.ylabel('Input/Output')
-        plt.savefig('input_output.png', dpi=300)
+        plt.savefig('input_output.png', dpi=600)
