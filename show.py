@@ -35,8 +35,8 @@ with connection:
         result = [[str(row['hour']) for row in result], [row['max_input'] for row in result], [row['max_output'] for row in result], [row['min_input'] for row in result], [row['min_output'] for row in result]]
 
         plt.plot(result[0], result[1])
-        plt.plot(result[0], result[2])
-        plt.plot(result[0], result[3])
-        plt.plot(result[0], result[4])
+        # plt.plot(result[0], result[2])
+        # plt.plot(result[0], result[3])
+        # plt.plot(result[0], result[4])
         plt.ylabel('Input/Output')
         plt.savefig('input_output.png', dpi=600)
